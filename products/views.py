@@ -13,8 +13,8 @@ def index(request):
 
 
 def products(request):
-    cats = [cat for cat in Category.objects.all()]
-    prs = [pr for pr in Products.objects.all()]
+    cats = Category.objects.all()
+    prs = Products.objects.all()
     context = {
         'title': 'products',
         'products': prs,
