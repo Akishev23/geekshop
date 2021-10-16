@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import index, products
+from django.conf.urls import url
+from .views import index, products, get_cat
 
 app_name = 'products'
 
 urlpatterns = [
-    path('', products, name='ind'),
     path('index/', index, name='index'),
     path('', products, name='products'),
+
 ]

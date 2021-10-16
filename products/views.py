@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import json
 from .models import Category, Products
 
 
@@ -21,3 +20,15 @@ def products(request):
         'cats': cats
     }
     return render(request, 'products/products.html', context)
+
+
+def get_cat(request, cat_id):
+    prs = Products.objects.filter(category_id=cat_id)
+    cats = Category.objects.all()
+    category = Category.objects.get(pk=cat_id)
+    context = {
+        'products': prs,
+        'cats': cats,
+        'category': category
+    }
+    return render(request, template_name='products/prod_of_cats.html', context=context)
