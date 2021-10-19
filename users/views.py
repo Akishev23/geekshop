@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
+from django.contrib import messages
 from users.forms import UserLoginForm, UserRegisterForm
 from django.contrib import auth
 from django.urls import reverse
@@ -10,14 +11,12 @@ def login(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)
+            user = form.get_user()
             if user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('products:index'))
         else:
-            print(form.errors)
+            messages.error(request, 'Ошибка входа!')
     else:
         form = UserLoginForm()
     return render(request, 'users/login.html', {'title': 'GeeShop - Авторизация',
@@ -28,10 +27,12 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('users:login'))
+            user = form.save()
+            auth.login(request, user)
+            messages.success(request, 'Вы успешно зарегистрированы')
+            return HttpResponseRedirect(reverse('products:index'))
         else:
-            print(form.errors)
+            messages.error(request, 'Ошибка регистрации!')
     else:
         form = UserRegisterForm()
 
