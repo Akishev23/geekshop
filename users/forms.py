@@ -1,5 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from users.models import User
+import re
+from django.core.exceptions import ValidationError
 
 
 class UserLoginForm(AuthenticationForm):
@@ -31,3 +33,9 @@ class UserRegisterForm(UserCreationForm):
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if re.match(r'\d', username):
+            raise ValidationError('Имя пользователя не должно начинаться с цифры')
+        return username
