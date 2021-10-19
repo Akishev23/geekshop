@@ -1,0 +1,27 @@
+<div class="row">
+
+    {% for good in products %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <a href="#">
+                    <img class="card-img-top"
+                         src="{{ good.image.url }}"
+                         alt="{{ good.title }}">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">{{ good.title }}</a>
+                    </h4>
+                    <h5>{{ good.price }} руб.</h5>
+                    <p class="card-text">{{ good.desc }}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+</div>

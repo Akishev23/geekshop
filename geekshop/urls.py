@@ -17,12 +17,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from products.views import products
+from products.views import products, get_cat
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('products.urls', namespace='products')),
-    path('products/', products, 'products')
+    path('products/', products, 'products'),
+    path('category/<int:cat_id>/', get_cat, name='get_cat'),
+    path('users/', include('users.urls', namespace='users'))
 ]
 
 if settings.DEBUG:

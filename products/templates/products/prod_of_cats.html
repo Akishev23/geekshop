@@ -7,17 +7,17 @@
 
 
 {% block content %}
-
+    <!-- Page Content -->
     <div class="container">
+
+        <h3 style="text-align: center">Товары в категории {{ category }}</h3>
 
         <div class="row">
 
             {% include 'inc/_sidebar.html' %}
-            <!-- /.col-lg-3 -->
 
             <div class="col-lg-9">
 
-                {% include 'inc/_slider.html' %}
 
                 {% include 'inc/_goods.html' %}
 
@@ -28,11 +28,10 @@
         </div>
 
     </div>
-
+    <!-- /.container -->
 {% endblock %}
-
+<!-- Footer -->
 
 {% block footer %}
     {% include 'inc/_footer.html' %}
 {% endblock %}
-
