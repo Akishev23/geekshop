@@ -25,7 +25,8 @@ urlpatterns = [
     path('', include('products.urls', namespace='products')),
     path('products/', products, 'products'),
     path('category/<int:cat_id>/', get_cat, name='get_cat'),
-    path('users/', include('users.urls', namespace='users'))
+    path('users/', include('users.urls', namespace='users')),
+    path('baskets/', include('baskets.urls', namespace='baskets'))
 ]
 
 if settings.DEBUG:
