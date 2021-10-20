@@ -1,15 +1,15 @@
-{% extends 'users/base.html' %}
+{% extends 'users/base_users.html' %}
 
 {% block form %}
     <div class="row justify-content-center">
         <div class="col-lg-5">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert"
-                 style="margin-top: 50px;">
-                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        {%  include 'inc/_messages.html' %}
+            {% if form.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                     style="margin-top: 50px;">
+                        {{form.non_field_errors}}
+                </div>
+            {% endif %}
             <div class="card shadow-lg border-0 rounded-lg mt-5">
                 <div class="card-header"><h3 class="text-center font-weight-light my-4">
                     Авторизация</h3>
@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <label class="small mb-1" for="inputEmailAddress">Имя
                                 пользователя</label>
-                            {{ form.username}}
+                            {{ form.username }}
                         </div>
                         <div class="form-group">
                             <label class="small mb-1" for="inputPassword">Пароль</label>
@@ -33,7 +33,8 @@
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    <div class="small"><a href="{% url 'users:register'%}">Нужен аккаунт? Зарегистрируйся!</a>
+                    <div class="small"><a href="{% url 'users:register' %}">Нужен аккаунт?
+                        Зарегистрируйся!</a>
                     </div>
                 </div>
             </div>

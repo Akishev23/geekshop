@@ -1,4 +1,5 @@
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from users.models import User
 import re
 from django.core.exceptions import ValidationError
@@ -39,3 +40,26 @@ class UserRegisterForm(UserCreationForm):
         if re.match(r'\d', username):
             raise ValidationError('Имя пользователя не должно начинаться с цифры')
         return username
+
+
+class UserProfileForm(UserChangeForm):
+    image = forms.ImageField(widget=forms.FileInput(), required=False)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', 'image')
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['readonly'] = True
+        self.fields['image'].widget.attrs['readonly'] = True
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control py-4'
+        self.fields['image'].widget.attrs['class'] = 'custom-file-input'
+
+    def clean_image(self):
+        img = self.cleaned_data['image']
+        if img.size > 100000:
+            raise ValidationError('Изображение не может быть больше 1000КБ')
+        return img

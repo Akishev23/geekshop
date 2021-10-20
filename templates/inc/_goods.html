@@ -17,7 +17,8 @@
                     <p class="card-text">{{ good.desc }}</p>
                 </div>
                 <div class="card-footer text-center">
-                    <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
+                    <a href="{%  url 'baskets:basket' good.pk %}" class="btn
+                    btn-outline-success">Отправить в корзину</a>
                 </div>
             </div>
         </div>
