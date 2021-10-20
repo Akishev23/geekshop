@@ -14,6 +14,7 @@ def login(request):
             user = form.get_user()
             if user.is_active:
                 auth.login(request, user)
+                messages.success(request, 'Вы успешно вошли на сайт')
                 return HttpResponseRedirect(reverse('products:index'))
         else:
             messages.error(request, 'Ошибка входа!')
