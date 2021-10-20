@@ -59,9 +59,7 @@ def profile(request):
     context = {
         'title': 'Личный кабинет',
         'form': UserProfileForm(instance=user_req),
-        'baskets': baskets,
-        'total_quantity': sum(basket.quantity for basket in baskets),
-        'total_sum': sum(basket.sum() for basket in baskets)
+        'baskets': baskets
     }
 
     return render(request, 'users/profile.html', context)
