@@ -1,11 +1,11 @@
 from django.db import models
-
 from users.models import User
 
 from products.models import Products
 
 
 # Create your models here.
+
 
 class Basket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -20,3 +20,10 @@ class Basket(models.Model):
     def sum(self):
         return self.product.price * self.quantity
 
+    def total_quantity(self):
+        baskets = Basket.objects.filter(user=self.user)
+        return sum(basket.quantity for basket in baskets)
+
+    def total_sum(self):
+        baskets = Basket.objects.filter(user=self.user)
+        return sum(basket.sum() for basket in baskets)
