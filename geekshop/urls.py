@@ -17,14 +17,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from products.views import products, get_cat
+from products.views import index, GetCategory
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('products.urls', namespace='products')),
-    path('products/', products, 'products'),
-    path('category/<int:cat_id>/', get_cat, name='get_cat'),
+    path('index/', index, name='index'),
+    path('category/<int:cat_id>/', GetCategory.as_view(), name='get_cat'),
     path('users/', include('users.urls', namespace='users')),
     path('baskets/', include('baskets.urls', namespace='baskets')),
 ]
