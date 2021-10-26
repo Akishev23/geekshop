@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import index, UserListView, UserUpdateView, UserCreateView, UserDeleteView
+from products.admin import ProductsAdmin
 
 app_name = 'myadmin'
 
