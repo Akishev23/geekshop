@@ -27,7 +27,8 @@ urlpatterns = [
     path('category/<int:cat_id>/', GetCategory.as_view(), name='get_cat'),
     path('users/', include('users.urls', namespace='users')),
     path('baskets/', include('baskets.urls', namespace='baskets')),
-    path('myadmin/', include('myadmin.urls', namespace='myadmin'))
+    path('myadmin/', include('myadmin.urls', namespace='myadmin')),
+
 ]
 
 if settings.DEBUG:
