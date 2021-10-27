@@ -1,6 +1,6 @@
 from django.contrib.auth import logout, login
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView
 from baskets.models import Basket
 from myadmin.utils import SuperUserMixin
@@ -8,7 +8,6 @@ from users.forms import UserRegisterForm, UserProfileForm
 from django.urls import reverse_lazy
 from .forms import UserLoginForm
 from products.utils import *
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import User
 
