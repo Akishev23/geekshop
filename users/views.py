@@ -3,6 +3,7 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView
 from baskets.models import Basket
+from myadmin.utils import SuperUserMixin
 from users.forms import UserRegisterForm, UserProfileForm
 from django.urls import reverse_lazy
 from .forms import UserLoginForm
@@ -33,7 +34,7 @@ class RegisterUser(BaseContextMixin, CreateView):
         return redirect('products:products')
 
 
-class UserProfile(LoginRequiredMixin, BaseContextMixin, UpdateView):
+class UserProfile(SuperUserMixin, BaseContextMixin, UpdateView):
     model = User
     form_class = UserProfileForm
     template_name = 'users/profile.html'
