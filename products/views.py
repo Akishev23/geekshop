@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from .utils import *
 
 
-class ProductPage(ContextMixin, ListView):
+class ProductPage(MyContextMixin, ListView):
     model = Products
     template_name = 'products/products.html'
     context_object_name = 'products'
@@ -26,7 +26,7 @@ def index(request):
     return render(request, 'products/index.html', context)
 
 
-class GetCategory(ContextMixin, ListView):
+class GetCategory(MyContextMixin, ListView):
     model = Products
     template_name = 'products/prod_of_cats.html'
     context_object_name = 'products'
