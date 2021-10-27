@@ -8,5 +8,6 @@
         {% for cat in cats %}
             <a href="{{ cat.get_absolute_url }}" class="list-group-item">{{ cat.title }}</a>
         {% endfor %}
+            <a href="{% url 'products:products' %}" class="list-group-item">Убрать фильтр</a>
     </div>
 </div>
