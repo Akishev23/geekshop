@@ -4,10 +4,11 @@ from django.views.generic import ListView
 from .utils import *
 
 
-class ProductPage(ContextMixin, ListView):
+class ProductPage(MyContextMixin, ListView):
     model = Products
     template_name = 'products/products.html'
     context_object_name = 'products'
+    paginate_by = 3
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -25,11 +26,12 @@ def index(request):
     return render(request, 'products/index.html', context)
 
 
-class GetCategory(ContextMixin, ListView):
+class GetCategory(MyContextMixin, ListView):
     model = Products
     template_name = 'products/prod_of_cats.html'
     context_object_name = 'products'
     allow_empty = False
+    paginate_by = 3
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
