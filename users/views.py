@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404, render
+from django.views import View
 from django.views.generic import CreateView, UpdateView
 from baskets.models import Basket
 from myadmin.utils import SuperUserMixin
@@ -86,6 +87,7 @@ def verify(request, email, activation_key):
         return HttpResponseRedirect(reverse('users:login'))
 
 
-def logout_user(request):
-    logout(request)
-    return redirect('users:login')
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect(settings.LOGIN_URL)
