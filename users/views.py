@@ -34,6 +34,7 @@ class RegisterUser(BaseContextMixin, CreateView):
     def form_valid(self, form):
         if form.is_valid():
             user = form.save()
+            mes = messages.success(self.request, 'Вы успешно зарегистрировались')
             user.save()
 
             verify_link = reverse('users:verify', args=[user.email, user.activation_key])
@@ -42,6 +43,7 @@ class RegisterUser(BaseContextMixin, CreateView):
                       f'{settings.DOMAIN_NAME}{verify_link}'
             send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email],
                       fail_silently=False)
+
             return redirect('users:login')
         else:
             raise ValueError('something wrong with form')
@@ -78,7 +80,6 @@ def verify(request, email, activation_key):
             user.activation_key_created = None
             user.is_active = True
             user.save()
-            messages.success(request, 'Вы успешно зарегистрировались')
             auth.login(request, user)
             return render(request, 'users/verification.html')
     except Exception as e:
