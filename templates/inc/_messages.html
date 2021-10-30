@@ -1,5 +1,5 @@
 {% if messages %}
-   {% for message in messages %}
+      {% for message in messages %}
         {% if message.tags == 'error' %}
             <div class="alert alert-danger" role="alert">
                 {{ message }}
@@ -9,5 +9,5 @@
                 {{ message }}
             </div>
         {% endif %}
-    {% endfor %}
+       {% endfor %}
 {% endif %}

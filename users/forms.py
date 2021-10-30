@@ -1,3 +1,6 @@
+import hashlib
+import random
+
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from users.models import User
@@ -41,13 +44,28 @@ class UserRegisterForm(UserCreationForm):
             raise ValidationError('Имя пользователя не должно начинаться с цифры')
         return username
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        cur_emails = User.objects.filter(email=email)
+        if cur_emails:
+            raise ValidationError('Пользователь с таким почтовым ящиком уже зарегистрирован')
+        return email
+
+    def save(self, commit=True):
+        user = super(UserRegisterForm, self).save()
+        user.is_active = False
+        salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:6]
+        user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
+        user.save()
+        return user
+
 
 class UserProfileForm(UserChangeForm):
     image = forms.ImageField(widget=forms.FileInput(), required=False)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'image')
+        fields = ('username', 'email', 'age', 'first_name', 'last_name', 'image')
 
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
