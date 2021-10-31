@@ -80,7 +80,7 @@ class UserProfileForm(UserChangeForm):
 class UserSocialForm(forms.ModelForm):
     class Meta:
         model = UserExternProfile
-        fields = ('tagline', 'about', 'gender', 'email')
+        fields = ('tagline', 'about', 'gender', 'email', 'photo', 'lang')
 
     def __init__(self, *args, **kwargs):
         super(UserSocialForm, self).__init__(*args, **kwargs)

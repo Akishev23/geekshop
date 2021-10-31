@@ -41,6 +41,8 @@ class UserExternProfile(models.Model):
     about = models.TextField(verbose_name='О себе', blank=True, null=True)
     gender = models.CharField(verbose_name='Пол', choices=GENDER_CHOICES, blank=True, max_length=2)
     email = models.CharField(max_length=128, blank=True)
+    photo = models.ImageField(upload_to='vkphoto/%Y/%m/%d', verbose_name='Фото из вк', blank=True)
+    lang = models.CharField(verbose_name='Язык', blank=True, max_length=128)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
