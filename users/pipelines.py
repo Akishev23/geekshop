@@ -45,7 +45,10 @@ def save_user_profile(backend, user, response, *args, **kwargs):
 
     try:
         if data['photo_50']:
-            user.userexternprofile.photo = data['photo_50']
+            link = requests.get(data['photo_50'])
+            with open(f'media/vkphoto/%Y/%m/%d.jpg', 'wb') as f:
+                f.write(link.content)
+            user.userexternprofile.photo = f'media/vkphoto/%Y/%m/%d.jpg'
     except KeyError:
         pass
 
