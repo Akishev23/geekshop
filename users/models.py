@@ -43,10 +43,10 @@ class UserExternProfile(models.Model):
     email = models.CharField(max_length=128, blank=True)
 
     @receiver(post_save, sender=User)
-    def create_user_profile(self, sender, instance, create, **kwargs):
-        if create:
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
             UserExternProfile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
-    def save_user_profile(self, sender, instance, **kwargs):
+    def save_user_profile(sender, instance, **kwargs):
         instance.userexternprofile.save()

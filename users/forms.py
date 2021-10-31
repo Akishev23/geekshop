@@ -84,8 +84,6 @@ class UserSocialForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UserSocialForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs['readonly'] = True
-        self.fields['image'].widget.attrs['readonly'] = True
 
         for field_name, field in self.fields.items():
             if field_name != 'gender':
