@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
     'baskets.apps.BasketsConfig',
-    'myadmin.apps.MyadminConfig'
+    'myadmin.apps.MyadminConfig',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'geekshop.urls'
@@ -68,7 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'products.context_processors.basket'
+                'products.context_processors.basket',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -131,6 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/'
 
 DOMAIN_NAME = 'http:/localhost:8000'
 EMAIL_HOST = 'localhost'
@@ -142,3 +146,12 @@ EMAIL_USE_SSL = True if os.getenv('EMAIL_USE_SSL') else False
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp/emails'
 
+SOCIAL_AUTH_VK_OAUTH2_KEY = '7988795'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'YGxfjMp7c981CCshh8vR'
+SOCIAL_AUTH_VK_OAUTH2_API_VERSION = '5.131'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2'
+)

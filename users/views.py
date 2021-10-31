@@ -9,7 +9,7 @@ from django.views import View
 from django.views.generic import CreateView, UpdateView
 from baskets.models import Basket
 from myadmin.utils import SuperUserMixin
-from users.forms import UserRegisterForm, UserProfileForm
+from users.forms import UserRegisterForm, UserProfileForm, UserSocialForm
 from django.urls import reverse_lazy, reverse
 from .forms import UserLoginForm
 from products.utils import *
@@ -67,7 +67,8 @@ class UserProfile(SuperUserMixin, BaseContextMixin, UpdateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(data=request.POST, files=request.FILES, instance=self.get_object())
-        if form.is_valid():
+        form_edit = UserSocialForm(data=request.POST, intance=request.user.userexternprofile)
+        if form.is_valid() and form_edit.is_valid():
             form.save()
             return redirect(self.success_url)
         return redirect(self.success_url)
