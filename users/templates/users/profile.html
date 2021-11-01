@@ -29,7 +29,7 @@
 {% static 'vendor/img/users/default_avatar.jpg' %} {% endif %}"
                          class="img-thumbnail">
                 </div>
-                <form action="{% url 'users:profile' pk=user.pk%}" method="post"
+                <form action="{% url 'users:profile' pk=user.pk %}" method="post"
                       enctype="multipart/form-data">
 
                     {% csrf_token %}
@@ -74,6 +74,41 @@
                             <label class="small mb-1" for="
 {{ form.age.id_for_label }}">Возраст</label>
                             {{ form.age }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-3">
+                            <label class="small mb-1" for="
+{{ extprofile.gender.id_for_label }}">Пол</label>
+                            {{ extprofile.gender }}
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="small mb-1" for="
+{{ extprofile.email.id_for_label }}">Почта(вн)</label>
+                            {{ extprofile.email }}
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="small mb-1" for="
+{{ extprofile.tagline.id_for_label }}">Теги</label>
+                            {{ extprofile.tagline }}
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="small mb-1" for="
+{{ extprofile.lang.id_for_label }}">Язык</label>
+                            {{ extprofile.lang }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <img width="100" height="100"
+                                 src="{% if extprofile.photo %} {{ extprofile.photo.url }} {% else %}
+{% static 'vendor/img/unnamed.png' %} {% endif %}"
+                                 class="img-thumbnail">
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="small mb-1" for="
+{{ extprofile.about.id_for_label }}">О себе</label>
+                            {{ extprofile.about }}
                         </div>
                     </div>
                     <div class="form-row">

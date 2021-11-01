@@ -3,11 +3,11 @@
 {% block form %}
     <div class="row justify-content-center">
         <div class="col-lg-5">
-        {%  include 'inc/_messages.html' %}
+            {% include 'inc/_messages.html' %}
             {% if form.errors %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert"
                      style="margin-top: 50px;">
-                        {{form.non_field_errors}}
+                    {{ form.non_field_errors }}
                 </div>
             {% endif %}
             <div class="card shadow-lg border-0 rounded-lg mt-5">
@@ -31,6 +31,12 @@
                             <input class="btn btn-primary" type="submit" value="Авторизоваться">
                         </div>
                     </form>
+                    <div class="list-group-horizontal card-footer text-center small">
+                        <a href="{% url 'social:begin' backend='vk-oauth2' %}?next=/">Вход через
+                        социальную сеть "Вконтакте"
+                            <i class="fab fa-vk"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="card-footer text-center">
                     <div class="small"><a href="{% url 'users:register' %}">Нужен аккаунт?

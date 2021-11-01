@@ -5,15 +5,16 @@ from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404, render
+from django.views import View
 from django.views.generic import CreateView, UpdateView
-from baskets.models import Basket
+from django.contrib.auth.mixins import LoginRequiredMixin
 from myadmin.utils import SuperUserMixin
-from users.forms import UserRegisterForm, UserProfileForm
+from users.forms import UserRegisterForm, UserProfileForm, UserSocialForm
 from django.urls import reverse_lazy, reverse
 from .forms import UserLoginForm
 from products.utils import *
 from django.contrib import messages
-from .models import User
+from .models import User, UserExternProfile
 
 
 class UserLogin(BaseContextMixin, LoginView):
@@ -49,7 +50,7 @@ class RegisterUser(BaseContextMixin, CreateView):
             raise ValueError('something wrong with form')
 
 
-class UserProfile(SuperUserMixin, BaseContextMixin, UpdateView):
+class UserProfile(LoginRequiredMixin, BaseContextMixin, UpdateView):
     model = User
     form_class = UserProfileForm
     template_name = 'users/profile.html'
@@ -60,13 +61,20 @@ class UserProfile(SuperUserMixin, BaseContextMixin, UpdateView):
     def get_object(self, *args, **kwargs):
         return get_object_or_404(User, pk=self.kwargs['pk'])
 
+    def get_context_data(self, **kwargs):
+        context = super(UserProfile, self).get_context_data(**kwargs)
+        context['extprofile'] = UserSocialForm(instance=self.request.user.userexternprofile)
+        return context
+
     def get_queryset(self):
         base_qs = super(UserProfile, self).get_queryset()
         return base_qs.filter(username=self.request.user.pk)
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(data=request.POST, files=request.FILES, instance=self.get_object())
-        if form.is_valid():
+        form_2 = UserSocialForm(data=request.POST,
+                                           instance=request.user.userexternprofile)
+        if form.is_valid() and form_2.is_valid():
             form.save()
             return redirect(self.success_url)
         return redirect(self.success_url)
@@ -80,12 +88,13 @@ def verify(request, email, activation_key):
             user.activation_key_created = None
             user.is_active = True
             user.save()
-            auth.login(request, user)
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return render(request, 'users/verification.html')
     except Exception as e:
         return HttpResponseRedirect(reverse('users:login'))
 
 
-def logout_user(request):
-    logout(request)
-    return redirect('users:login')
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect(settings.LOGIN_URL)
