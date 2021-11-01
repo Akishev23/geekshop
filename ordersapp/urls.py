@@ -9,6 +9,6 @@ urlpatterns = [
     path('create/', OrderCreate.as_view(), name='create'),
     path('update/<int:pk>/', OrderUpdate.as_view(), name='update'),
     path('details/<int:pk>/', OrderDetail.as_view(), name='details'),
-    path('delete/<int:pk>', OrderDelete.as_view(), name='delete'),
-    path('status/<int:pk>', order_forming_complete, name='status')
+    path('delete/<int:pk>/', OrderDelete.as_view(), name='delete'),
+    path('status/<int:pk>/', order_forming_complete, name='status')
 ]

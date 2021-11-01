@@ -8,10 +8,10 @@
        {% include 'ordersapp/_inc/_order_summary.html' %}
        <form action="{% url 'orders:delete' object.pk %}" method="post">
            {% csrf_token %}
-           <input class="btn btn-danger" type="submit" value="удалить">
+           <input class="btn btn-danger" type="submit" value="Удалить">
        </form>
        <button class="btn btn-success mt-4">
-           <a href="{% url 'orders:list' %}">отмена</a>
+           <a href="{% url 'orders:orders' %}">Отмена</a>
        </button>
    </div>
 </div>

@@ -26,25 +26,25 @@
                 {% if item.is_active %}
                     <tr>
                         <td class="td1 orders_list">{{ item.pk }}</td>
-                        <td>{{ item.created|date:"Y-m-d H:i:s" }}</td>
-                        <td>{{ item.updated|date:"Y-m-d H:i:s" }}</td>
+                        <td>{{ item.created_at|date:"Y-m-d H:i:s" }}</td>
+                        <td>{{ item.updated_at|date:"Y-m-d H:i:s" }}</td>
                         <td>{{ item.get_status_display }}</td>
                         <td>
-                            <a href="{% url 'orders:read' item.pk %}">
-                                посмотреть
+                            <a href="{% url 'orders:details' item.pk %}">
+                                Посмотреть
                             </a>
                         </td>
                         <td>
                             {% if item.status == 'FM' %}
                                 <a href="{% url 'orders:update' item.pk %}">
-                                    редактировать
+                                    Редактировать
                                 </a>
                             {% endif %}
                         </td>
                         <td>
                             {% if item.status == 'FM' %}
                                 <a href="{% url 'orders:delete' item.pk %}">
-                                    удалить
+                                    Удалить
                                 </a>
                             {% endif %}
                         </td>
@@ -56,12 +56,12 @@
 
         <button class="btn btn-light btn-round">
             <a href="{% url 'index' %}">
-                на главную
+                На главную
             </a>
         </button>
         <button class="btn btn-warning btn-round">
             <a href="{% url 'orders:create' %}">
-                новый
+                Новый
             </a>
         </button>
     </div>

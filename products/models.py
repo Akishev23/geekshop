@@ -26,6 +26,7 @@ class Products(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
     is_published = models.BooleanField(default=True, verbose_name='Флаг публикации')
+    quantity = models.PositiveIntegerField(default=10)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, null=True,
                                  verbose_name='Категория')
 
