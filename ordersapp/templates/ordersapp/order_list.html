@@ -48,6 +48,15 @@
                                 </a>
                             {% endif %}
                         </td>
+                        <td>
+                            {% if item.status == 'FM' %}
+                            <button class="btn btn-warning btn-round form-control w-25 my-2 last">
+                                <a href="{% url 'orders:status' item.pk %}">
+                                    Отгрузить
+                                </a>
+                            </button>
+                                {% endif %}
+                        </td>
                     </tr>
                 {% endif %}
             {% endfor %}
