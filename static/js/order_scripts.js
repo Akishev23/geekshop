@@ -20,8 +20,6 @@ window.onload = function () {
         } else {
             price_arr[i] = 0
         }
-
-
     }
 
     console.info('PRICE:', price_arr)
