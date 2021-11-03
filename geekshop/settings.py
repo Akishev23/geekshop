@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'baskets.apps.BasketsConfig',
     'myadmin.apps.MyadminConfig',
-    'social_django'
+    'social_django',
+    'ordersapp.apps.OrdersappConfig'
 ]
 
 MIDDLEWARE = [
