@@ -4,10 +4,18 @@ from users.models import User
 from products.models import Products
 
 
-# Create your models here.
+class BasketQuerySet(models.QuerySet):
+
+    def delete(self, *args, **kwargs):
+        for item in self:
+            item.product.quantity += item.quantity
+            item.product.save()
+
+        super(BasketQuerySet, self).delete()
 
 
 class Basket(models.Model):
+    objects = BasketQuerySet.as_manager()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
@@ -27,3 +35,21 @@ class Basket(models.Model):
     def total_sum(self):
         baskets = Basket.objects.filter(user=self.user)
         return sum(basket.sum() for basket in baskets)
+
+    def delete(self, using=None, keep_parents=False):
+        self.product.quantity += self.quantity
+        self.save()
+        super(Basket, self).delete()
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.pk:
+            self.product.quantity -= self.quantity - self.get_item(self.pk)
+        else:
+            self.product.quantity -= self.quantity
+        self.product.save()
+        super(Basket, self).save()
+
+    @staticmethod
+    def get_item(pk):
+        return Basket.objects.get(pk=pk).quantity
