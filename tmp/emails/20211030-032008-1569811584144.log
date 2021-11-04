@@ -1,0 +1,13 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0JDQutGC0LjQstCw0YbQuNGPINGD0YfQtdGC0L3QvtC5INC30LDQv9C40YHQuA==?=
+From: django
+To: gnida1@nauk.ru
+Date: Sat, 30 Oct 2021 00:20:08 -0000
+Message-ID: <163555320862.5392.15513249864506691175@dkgeek>
+
+Для подтверждения учетной записи gnida1 перейдите по ссылке 
+http:/localhost:8000/users/verify/gnida1@nauk.ru/32892419ea6caf79149b9aedd761a3d6a369a670/
+-------------------------------------------------------------------------------

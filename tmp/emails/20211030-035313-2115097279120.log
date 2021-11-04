@@ -1,0 +1,13 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0JDQutGC0LjQstCw0YbQuNGPINGD0YfQtdGC0L3QvtC5INC30LDQv9C40YHQuA==?=
+From: django
+To: Anton555@mail.ru
+Date: Sat, 30 Oct 2021 00:53:13 -0000
+Message-ID: <163555519346.16172.15496571817788912065@dkgeek>
+
+Для подтверждения учетной записи Anton555 перейдите по ссылке 
+http:/localhost:8000/users/verify/Anton555@mail.ru/c970fcc195f8cd9932ef3f73ae2bc41e0b01623e/
+-------------------------------------------------------------------------------

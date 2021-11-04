@@ -1,0 +1,13 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0JDQutGC0LjQstCw0YbQuNGPINGD0YfQtdGC0L3QvtC5INC30LDQv9C40YHQuA==?=
+From: django
+To: Anton233444@hm.ru
+Date: Sat, 30 Oct 2021 00:37:29 -0000
+Message-ID: <163555424996.21756.11820737843405896574@dkgeek>
+
+Для подтверждения учетной записи Anton233444 перейдите по ссылке 
+http:/localhost:8000/users/verify/Anton233444@hm.ru/f213475fb4aa173334ff5108aee040332e84f400/
+-------------------------------------------------------------------------------

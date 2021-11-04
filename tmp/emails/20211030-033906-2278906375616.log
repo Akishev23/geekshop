@@ -1,0 +1,13 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0JDQutGC0LjQstCw0YbQuNGPINGD0YfQtdGC0L3QvtC5INC30LDQv9C40YHQuA==?=
+From: django
+To: andrew34@mail.ru
+Date: Sat, 30 Oct 2021 00:39:06 -0000
+Message-ID: <163555434632.18624.12496900103550281344@dkgeek>
+
+Для подтверждения учетной записи andrew34 перейдите по ссылке 
+http:/localhost:8000/users/verify/andrew34@mail.ru/4d46f34211a8c0c01f8335bb554de4ea5ab80181/
+-------------------------------------------------------------------------------
