@@ -10,7 +10,6 @@ geekshop/__pycache__/
 
 products/__pycache__/
 /db.sqlite3
-media/
 users/.env
 .env
 /.env
