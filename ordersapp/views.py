@@ -1,6 +1,6 @@
 from django.db import transaction
 from django.forms import inlineformset_factory
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -9,6 +9,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DetailView, D
 
 from baskets.models import Basket
 from ordersapp.models import Order, OrderItems
+from products.models import Products
 from products.utils import BaseContextMixin
 from .forms import OrderItemsForm
 
@@ -85,11 +86,11 @@ class OrderUpdate(UpdateView):
             formset = OrderFormSet(self.request.POST, instance=self.object)
 
         else:
-                formset = OrderFormSet(instance=self.object)
+            formset = OrderFormSet(instance=self.object)
 
-                for form in formset:
-                    if form.instance.pk:
-                        form.initial['price'] = form.instance.product.price
+            for form in formset:
+                if form.instance.pk:
+                    form.initial['price'] = form.instance.product.price
 
         context['orderitems'] = formset
 
@@ -127,3 +128,11 @@ def order_forming_complete(request, pk):
     order.status = Order.SEND_TO_PROCEED
     order.save()
     return HttpResponseRedirect(reverse_lazy('orders:orders'))
+
+
+def get_product_price(request, pk):
+    if request.is_ajax():
+        product = Products.objects.get(pk=pk)
+        if product:
+            return JsonResponse({'price': product.price})
+    return JsonResponse({'price': 0})
