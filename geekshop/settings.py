@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'ordersapp.apps.OrdersappConfig',
     'debug_toolbar',
     'template_profiler_panel'
+    'django_extensions',
+
 ]
 
 MIDDLEWARE = [
