@@ -82,7 +82,7 @@ class UserProfile(LoginRequiredMixin, BaseContextMixin, UpdateView):
 
     def get_queryset(self):
         base_qs = super(UserProfile, self).get_queryset()
-        return base_qs.filter(username=self.request.user.pk)
+        return base_qs.filter(username=self.request.user.pk).select_related('user')
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(data=request.POST, files=request.FILES, instance=self.get_object())
